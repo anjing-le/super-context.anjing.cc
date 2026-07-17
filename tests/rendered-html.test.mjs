@@ -11,6 +11,14 @@ test("首页只呈现三个能力模块", async () => {
   const html = await readRoute();
   assert.match(html, /<title>Super Context｜AI 时代能力地图<\/title>/);
   assert.equal((html.match(/class="module-card /g) ?? []).length, 3);
+  assert.equal(
+    (html.match(/class="module-card-face module-card-front"/g) ?? []).length,
+    3,
+  );
+  assert.equal(
+    (html.match(/class="module-card-face module-card-back"/g) ?? []).length,
+    3,
+  );
   assert.match(html, /稳定基础/);
   assert.match(html, /能力系统/);
   assert.match(html, /产品场景/);
@@ -38,6 +46,8 @@ test("三个模块页面都完成静态导出", async () => {
 
     assert.match(html, new RegExp(`<title>${title}｜Super Context<\\/title>`));
     assert.match(html, new RegExp(`<h1>${title}<\\/h1>`));
+    assert.match(html, /area-card-front/);
+    assert.match(html, /area-card-back/);
   }
 });
 

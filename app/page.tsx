@@ -16,15 +16,18 @@ export default function Home() {
               key={module.slug}
             >
               <span className="module-index">{module.index}</span>
-              <div className="module-copy">
+              <div className="module-card-face module-card-front">
+                <h2>{module.title}</h2>
+              </div>
+              <div className="module-card-face module-card-back">
                 <h2>{module.title}</h2>
                 <p>{module.cardSummary}</p>
+                <ul className="module-tags" aria-label={`${module.title}主题`}>
+                  {module.cardTags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               </div>
-              <ul className="module-tags" aria-label={`${module.title}主题`}>
-                {module.cardTags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
               <span className="card-arrow" aria-hidden="true">
                 ↗
               </span>

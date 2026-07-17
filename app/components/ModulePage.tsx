@@ -18,19 +18,27 @@ export function ModulePage({ module }: { module: LearningModule }) {
 
         <section className="area-grid" aria-label={`${module.title}能力地图`}>
           {module.areas.map((area, index) => (
-            <article className="area-card" key={area.title}>
+            <article
+              aria-label={`${area.title}：${area.summary}`}
+              className="area-card"
+              key={area.title}
+              tabIndex={0}
+            >
               <span className="area-index">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <div>
+              <div className="area-card-face area-card-front">
+                <h2>{area.title}</h2>
+              </div>
+              <div className="area-card-face area-card-back">
                 <h2>{area.title}</h2>
                 <p>{area.summary}</p>
+                <ul aria-label={`${area.title}关键词`}>
+                  {area.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               </div>
-              <ul aria-label={`${area.title}关键词`}>
-                {area.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
             </article>
           ))}
         </section>
