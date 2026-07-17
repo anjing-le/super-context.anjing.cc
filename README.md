@@ -25,4 +25,11 @@ npm run dev
 npm run build
 ```
 
-项目为无业务后端的纯前端站点，可由 Cloudflare 托管。
+构建产物位于 `out`，是无业务后端的纯静态前端站点。
+
+## Cloudflare Pages
+
+- Framework preset：`None`
+- Build command：`npm run build`
+- Build output directory：`out`
+- Root directory：留空
