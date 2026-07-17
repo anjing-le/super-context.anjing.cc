@@ -25,13 +25,18 @@ test("首页只呈现三个能力模块", async () => {
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview/);
 });
 
-test("理念页保存核心方法与学习循环", async () => {
+test("理念页用一页结构表达核心方法", async () => {
   const html = await readRoute("/principles");
   assert.match(html, /理念与指引｜Super Context/);
   assert.match(html, /成为 AI 的/);
-  assert.match(html, /从知识点，到能力系统/);
-  assert.match(html, /人负责定义问题、组织上下文、组合系统、判断取舍与验证结果/);
+  assert.match(html, /知道什么场景需要什么能力/);
+  assert.equal((html.match(/class="principle-card /g) ?? []).length, 3);
+  assert.match(html, /学习完整系统/);
+  assert.match(html, /人判断，AI 展开/);
+  assert.match(html, /用交付完成学习/);
   assert.match(html, /学习循环/);
+  assert.match(html, /是把深度放在理解、判断与验证上/);
+  assert.doesNotMatch(html, /从知识点，到能力系统/);
 });
 
 test("三个模块页面都完成静态导出", async () => {
