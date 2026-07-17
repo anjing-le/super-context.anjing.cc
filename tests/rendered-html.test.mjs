@@ -52,9 +52,10 @@ test("三个模块页面都完成静态导出", async () => {
 });
 
 test("starter 预览已经彻底移除", async () => {
-  const [packageJson, page, layout] = await Promise.all([
+  const [packageJson, page, modulePage, layout] = await Promise.all([
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/ModulePage.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
   ]);
 
@@ -62,5 +63,7 @@ test("starter 预览已经彻底移除", async () => {
   assert.doesNotMatch(page, /codex-preview|SkeletonPreview/);
   assert.doesNotMatch(layout, /Starter Project/);
   assert.doesNotMatch(packageJson, /binding-darwin-arm64|vinext|wrangler/);
+  assert.doesNotMatch(page, /module-card-back">\s*<h2>/);
+  assert.doesNotMatch(modulePage, /area-card-back">\s*<h2>/);
   await assert.rejects(access(new URL("../app/_sites-preview", import.meta.url)));
 });

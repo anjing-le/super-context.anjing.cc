@@ -20,7 +20,6 @@ export default function Home() {
                 <h2>{module.title}</h2>
               </div>
               <div className="module-card-face module-card-back">
-                <h2>{module.title}</h2>
                 <p>{module.cardSummary}</p>
                 <ul className="module-tags" aria-label={`${module.title}主题`}>
                   {module.cardTags.map((tag) => (

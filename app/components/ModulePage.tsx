@@ -31,7 +31,6 @@ export function ModulePage({ module }: { module: LearningModule }) {
                 <h2>{area.title}</h2>
               </div>
               <div className="area-card-face area-card-back">
-                <h2>{area.title}</h2>
                 <p>{area.summary}</p>
                 <ul aria-label={`${area.title}关键词`}>
                   {area.tags.map((tag) => (
