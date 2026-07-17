@@ -4,6 +4,7 @@ export type LearningModule = {
   slug: string;
   index: string;
   title: string;
+  homeTitle: string;
   eyebrow: string;
   cardSummary: string;
   description: string;
@@ -22,6 +23,7 @@ export const modules: LearningModule[] = [
     slug: "foundations",
     index: "01",
     title: "稳定基础",
+    homeTitle: "基础",
     eyebrow: "Stable Foundations",
     cardSummary: "建立判断，不追逐语法。",
     description: "理解系统为何这样运行，知道面对不同问题时该如何选择技术方案。",
@@ -70,6 +72,7 @@ export const modules: LearningModule[] = [
     slug: "systems",
     index: "02",
     title: "能力系统",
+    homeTitle: "能力",
     eyebrow: "Capability Systems",
     cardSummary: "围绕问题，掌握完整方案。",
     description: "以真实能力为学习单位，贯通产品、各端、数据与运维。",
@@ -127,6 +130,7 @@ export const modules: LearningModule[] = [
     slug: "scenarios",
     index: "03",
     title: "产品场景",
+    homeTitle: "产品",
     eyebrow: "Product Scenarios",
     cardSummary: "组合能力，交付真实产品。",
     description: "从具体场景出发，组合能力系统，完成端到端交付。",

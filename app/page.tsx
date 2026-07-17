@@ -17,7 +17,7 @@ export default function Home() {
             >
               <span className="module-index">{module.index}</span>
               <div className="module-card-face module-card-front">
-                <h2>{module.title}</h2>
+                <h2>{module.homeTitle}</h2>
               </div>
               <div className="module-card-face module-card-back">
                 <p>{module.cardSummary}</p>

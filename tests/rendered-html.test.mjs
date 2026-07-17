@@ -19,9 +19,12 @@ test("首页只呈现三个能力模块", async () => {
     (html.match(/class="module-card-face module-card-back"/g) ?? []).length,
     3,
   );
-  assert.match(html, /稳定基础/);
-  assert.match(html, /能力系统/);
-  assert.match(html, /产品场景/);
+  assert.match(html, />基础<\/h2>/);
+  assert.match(html, />能力<\/h2>/);
+  assert.match(html, />产品<\/h2>/);
+  assert.doesNotMatch(html, />稳定基础<\/h2>/);
+  assert.doesNotMatch(html, />能力系统<\/h2>/);
+  assert.doesNotMatch(html, />产品场景<\/h2>/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview/);
 });
 
