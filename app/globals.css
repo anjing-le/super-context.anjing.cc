@@ -12,10 +12,19 @@
   --green-strong: #cce4cf;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display",
     "SF Pro Text", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  --cursor-default: url("/cursors/cursor.png"), auto;
+  --cursor-pointer: url("/cursors/pointer.png") 10 4, pointer;
 }
 
 * {
   box-sizing: border-box;
+  cursor: var(--cursor-default);
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+  cursor: var(--cursor-default);
 }
 
 html {
@@ -42,6 +51,31 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+a,
+a *,
+button,
+button *,
+[role="button"],
+[role="button"] *,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+summary,
+summary *,
+label[for],
+label[for] *,
+select {
+  cursor: var(--cursor-pointer);
+}
+
+button:disabled,
+button:disabled *,
+input:disabled,
+[aria-disabled="true"],
+[aria-disabled="true"] * {
+  cursor: var(--cursor-default);
 }
 
 a:focus-visible {
@@ -1370,7 +1404,7 @@ ol {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.07);
   color: rgba(255, 255, 255, 0.82);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   font: inherit;
   font-size: 10px;
   transition: background-color 180ms ease, border-color 180ms ease;
