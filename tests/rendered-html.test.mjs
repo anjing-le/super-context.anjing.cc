@@ -63,6 +63,31 @@ test("三个模块页面都完成静态导出", async () => {
   assert.doesNotMatch(foundations, /获得判断技术方案的坐标系/);
 });
 
+test("产品与用户样板只保留认知骨架", async () => {
+  const html = await readRoute("/foundations/product-and-users");
+
+  assert.match(html, /<title>产品与用户｜Super Context<\/title>/);
+  assert.match(html, /从模糊想法，到可验证的问题/);
+  assert.equal((html.match(/class="judgment-card"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="case-column /g) ?? []).length, 3);
+  assert.match(html, /现象.*用户.*场景.*问题.*价值.*最小方案.*验证/s);
+  assert.match(html, /已确认事实.*我的推测.*我已经提出的方案.*仍需验证的问题/s);
+  assert.match(
+    html,
+    /super-context 首先应该帮助哪一种人，在什么具体时刻，完成什么原本困难的任务？/,
+  );
+  assert.doesNotMatch(html, /入门任务|综合任务|10 个不诱导的访谈问题/);
+
+  await assert.rejects(
+    access(
+      new URL(
+        "../out/foundations/systems-and-abstractions/index.html",
+        import.meta.url,
+      ),
+    ),
+  );
+});
+
 test("starter 预览已经彻底移除", async () => {
   const [packageJson, page, modulePage, layout] = await Promise.all([
     readFile(new URL("../package.json", import.meta.url), "utf8"),

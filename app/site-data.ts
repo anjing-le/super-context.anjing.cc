@@ -10,6 +10,7 @@ export type LearningModule = {
   tone: ModuleTone;
   cardTags: string[];
   areas: Array<{
+    slug?: string;
     title: string;
     summary: string;
     tags: string[];
@@ -28,6 +29,7 @@ export const modules: LearningModule[] = [
     cardTags: ["产品", "系统", "数据"],
     areas: [
       {
+        slug: "product-and-users",
         title: "产品与用户",
         summary: "问题、价值与边界",
         tags: ["需求", "体验", "指标"],

@@ -17,29 +17,51 @@ export function ModulePage({ module }: { module: LearningModule }) {
         </header>
 
         <section className="area-grid" aria-label={`${module.title}能力地图`}>
-          {module.areas.map((area, index) => (
-            <article
-              aria-label={`${area.title}：${area.summary}`}
-              className="area-card"
-              key={area.title}
-              tabIndex={0}
-            >
-              <span className="area-index">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="area-card-face area-card-front">
-                <h2>{area.title}</h2>
-              </div>
-              <div className="area-card-face area-card-back">
-                <p>{area.summary}</p>
-                <ul aria-label={`${area.title}关键词`}>
-                  {area.tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
+          {module.areas.map((area, index) => {
+            const content = (
+              <>
+                <span className="area-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="area-card-face area-card-front">
+                  <h2>{area.title}</h2>
+                </div>
+                <div className="area-card-face area-card-back">
+                  <p>{area.summary}</p>
+                  <ul aria-label={`${area.title}关键词`}>
+                    {area.tags.map((tag) => (
+                      <li key={tag}>{tag}</li>
+                    ))}
+                  </ul>
+                </div>
+                {area.slug ? (
+                  <span className="area-arrow" aria-hidden="true">
+                    ↗
+                  </span>
+                ) : null}
+              </>
+            );
+
+            return area.slug ? (
+              <Link
+                aria-label={`${area.title}：${area.summary}`}
+                className="area-card area-card-link"
+                href={`/foundations/${area.slug}`}
+                key={area.title}
+              >
+                {content}
+              </Link>
+            ) : (
+              <article
+                aria-label={`${area.title}：${area.summary}`}
+                className="area-card"
+                key={area.title}
+                tabIndex={0}
+              >
+                {content}
+              </article>
+            );
+          })}
         </section>
 
         <footer className="detail-footer">

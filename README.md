@@ -8,6 +8,7 @@ AI 时代的能力与知识地图。
 
 - `/`：三大模块入口
 - `/foundations`：稳定基础
+- `/foundations/product-and-users`：「产品与用户」内容样板
 - `/systems`：能力系统
 - `/scenarios`：产品场景
 - `/principles`：理念与学习指引
