@@ -49,6 +49,13 @@ test("三个模块页面都完成静态导出", async () => {
     assert.match(html, /area-card-front/);
     assert.match(html, /area-card-back/);
   }
+
+  const foundations = await readRoute("/foundations");
+  assert.match(
+    foundations,
+    /理解系统为何这样运行，知道面对不同问题时该如何选择技术方案。/,
+  );
+  assert.doesNotMatch(foundations, /获得判断技术方案的坐标系/);
 });
 
 test("starter 预览已经彻底移除", async () => {

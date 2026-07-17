@@ -4,7 +4,7 @@ import { getModule } from "../site-data";
 
 export const metadata: Metadata = {
   title: "稳定基础",
-  description: "理解不会轻易过时的机制，获得判断技术方案的坐标系。",
+  description: "理解系统为何这样运行，知道面对不同问题时该如何选择技术方案。",
 };
 
 export default function FoundationsPage() {
