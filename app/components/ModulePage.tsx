@@ -1,10 +1,12 @@
 import Link from "next/link";
-import type { LearningModule } from "../site-data";
+import { capabilityDomains, type LearningModule } from "../site-data";
 import { SiteHeader } from "./SiteHeader";
 
 export function ModulePage({ module }: { module: LearningModule }) {
   return (
-    <main className={`detail-shell tone-${module.tone}`}>
+    <main
+      className={`detail-shell tone-${module.tone} module-${module.slug}`}
+    >
       <div className="detail-frame">
         <SiteHeader backHref="/" backLabel="返回" />
 
@@ -18,16 +20,31 @@ export function ModulePage({ module }: { module: LearningModule }) {
 
         <section className="area-grid" aria-label={`${module.title}能力地图`}>
           {module.areas.map((area, index) => {
+            const domain = area.domain
+              ? capabilityDomains[area.domain]
+              : undefined;
+            const areaLabel = domain
+              ? `${domain.code}. ${domain.title}—${area.title}`
+              : area.title;
             const content = (
               <>
                 <span className="area-index">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="area-card-face area-card-front">
+                  {domain ? (
+                    <p className="area-domain-label">
+                      <span>{domain.code}.</span>
+                      {domain.title}
+                    </p>
+                  ) : null}
                   <h2>{area.title}</h2>
                 </div>
                 <div className="area-card-face area-card-back">
-                  <p>{area.summary}</p>
+                  {domain ? (
+                    <span className="area-back-title">{areaLabel}</span>
+                  ) : null}
+                  <p className="area-card-summary">{area.summary}</p>
                   <ul aria-label={`${area.title}关键词`}>
                     {area.tags.map((tag) => (
                       <li key={tag}>{tag}</li>
@@ -44,8 +61,10 @@ export function ModulePage({ module }: { module: LearningModule }) {
 
             return area.slug ? (
               <Link
-                aria-label={`${area.title}：${area.summary}`}
-                className="area-card area-card-link"
+                aria-label={`${areaLabel}：${area.summary}`}
+                className={`area-card area-card-link${
+                  domain ? ` area-domain-${domain.tone}` : ""
+                }`}
                 href={`/${module.slug}/${area.slug}`}
                 key={area.title}
               >
@@ -53,8 +72,10 @@ export function ModulePage({ module }: { module: LearningModule }) {
               </Link>
             ) : (
               <article
-                aria-label={`${area.title}：${area.summary}`}
-                className="area-card"
+                aria-label={`${areaLabel}：${area.summary}`}
+                className={`area-card${
+                  domain ? ` area-domain-${domain.tone}` : ""
+                }`}
                 key={area.title}
                 tabIndex={0}
               >

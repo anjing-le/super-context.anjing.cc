@@ -97,10 +97,40 @@ test("六张稳定基础认知地图全部开放", async () => {
 test("身份与权限样板形成完整的系统设计文档", async () => {
   const systems = await readRoute("/systems");
   assert.equal(
-    (systems.match(/<a[^>]+class="area-card area-card-link"/g) ?? []).length,
+    (systems.match(/class="area-card-face area-card-front"/g) ?? []).length,
+    18,
+  );
+  assert.equal(
+    (systems.match(/<a[^>]+class="area-card area-card-link /g) ?? []).length,
     1,
   );
   assert.match(systems, /href="\/systems\/identity-and-access\/"/);
+  assert.equal(
+    (systems.match(/class="area-card[^\"]*area-domain-indigo"/g) ?? []).length,
+    4,
+  );
+  assert.equal(
+    (systems.match(/class="area-card[^\"]*area-domain-cyan"/g) ?? []).length,
+    6,
+  );
+  assert.equal(
+    (systems.match(/class="area-card[^\"]*area-domain-amber"/g) ?? []).length,
+    4,
+  );
+  assert.equal(
+    (systems.match(/class="area-card[^\"]*area-domain-violet"/g) ?? []).length,
+    4,
+  );
+  assert.match(systems, /业务治理与商业闭环/);
+  assert.match(systems, /数据、内容与系统协作/);
+  assert.match(systems, /交付、运行与系统治理/);
+  assert.match(systems, /AI 原生能力/);
+  assert.match(systems, /谁能在什么组织中，对什么资源执行什么动作/);
+  assert.match(systems, /用户买了什么、能用什么、用了多少、该收多少钱/);
+  assert.match(systems, /私有知识如何被处理、检索、授权并给出可信引用/);
+  assert.match(systems, /如何持续判断 AI 是否有效、可靠、安全且没有越权/);
+  assert.doesNotMatch(systems, />客户端与 OTA</);
+  assert.doesNotMatch(systems, />RAG 与 Agent</);
 
   const html = await readRoute("/systems/identity-and-access");
   assert.match(html, /<title>身份与权限｜Super Context<\/title>/);
