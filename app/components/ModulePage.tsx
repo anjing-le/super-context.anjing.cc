@@ -46,7 +46,7 @@ export function ModulePage({ module }: { module: LearningModule }) {
               <Link
                 aria-label={`${area.title}：${area.summary}`}
                 className="area-card area-card-link"
-                href={`/foundations/${area.slug}`}
+                href={`/${module.slug}/${area.slug}`}
                 key={area.title}
               >
                 {content}

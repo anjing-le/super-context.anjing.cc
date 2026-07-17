@@ -80,6 +80,7 @@ export const modules: LearningModule[] = [
     cardTags: ["权限", "支付", "网关"],
     areas: [
       {
+        slug: "identity-and-access",
         title: "身份与权限",
         summary: "从登录到组织治理",
         tags: ["SSO", "RBAC", "多租户"],

@@ -94,6 +94,30 @@ test("六张稳定基础认知地图全部开放", async () => {
   );
 });
 
+test("身份与权限样板形成完整的系统设计文档", async () => {
+  const systems = await readRoute("/systems");
+  assert.equal(
+    (systems.match(/<a[^>]+class="area-card area-card-link"/g) ?? []).length,
+    1,
+  );
+  assert.match(systems, /href="\/systems\/identity-and-access\/"/);
+
+  const html = await readRoute("/systems/identity-and-access");
+  assert.match(html, /<title>身份与权限｜Super Context<\/title>/);
+  assert.match(html, /从登录到组织治理/);
+  assert.match(html, /先确认.*你是谁.*什么组织.*什么资源.*什么动作.*可追溯的证据/s);
+  assert.equal((html.match(/class="identity-object-card"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="quick-check-card"/g) ?? []).length, 6);
+  assert.equal((html.match(/class="system-diagram /g) ?? []).length, 4);
+  assert.match(html, /User 不等于 Membership/);
+  assert.match(html, /Token 不是永远正确的权限事实/);
+  assert.match(html, /默认拒绝，显式允许/);
+  assert.match(html, /权限变更不能只改数据库/);
+  assert.match(html, /DELETE \/tenants\/t_01\/projects\/p_42/);
+  assert.match(html, /短会话 \/ 短 Token/);
+  assert.match(html, /AI 协作 · 设计身份权限体系/);
+});
+
 test("产品与用户样板保留已确认内容", async () => {
   const html = await readRoute("/foundations/product-and-users");
 
