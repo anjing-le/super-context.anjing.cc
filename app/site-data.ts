@@ -35,26 +35,31 @@ export const modules: LearningModule[] = [
         tags: ["需求", "体验", "指标"],
       },
       {
+        slug: "systems-and-abstractions",
         title: "系统与抽象",
         summary: "结构、约束与取舍",
         tags: ["架构", "接口", "复杂度"],
       },
       {
+        slug: "data-and-models",
         title: "数据与模型",
         summary: "事实、状态与关系",
         tags: ["建模", "查询", "一致性"],
       },
       {
+        slug: "network-and-computing",
         title: "网络与计算",
         summary: "请求、资源与性能",
         tags: ["协议", "并发", "存储"],
       },
       {
+        slug: "security-and-boundaries",
         title: "安全与边界",
         summary: "身份、信任与风险",
         tags: ["认证", "授权", "审计"],
       },
       {
+        slug: "ai-and-evaluation",
         title: "AI 与评测",
         summary: "概率、上下文与验证",
         tags: ["模型", "提示", "评测"],

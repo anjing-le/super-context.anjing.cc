@@ -63,11 +63,41 @@ test("三个模块页面都完成静态导出", async () => {
   assert.doesNotMatch(foundations, /获得判断技术方案的坐标系/);
 });
 
-test("产品与用户样板只保留认知骨架", async () => {
+test("六张稳定基础认知地图全部开放", async () => {
+  const routes = new Map([
+    ["/foundations/product-and-users", "产品与用户"],
+    ["/foundations/systems-and-abstractions", "系统与抽象"],
+    ["/foundations/data-and-models", "数据与模型"],
+    ["/foundations/network-and-computing", "网络与计算"],
+    ["/foundations/security-and-boundaries", "安全与边界"],
+    ["/foundations/ai-and-evaluation", "AI 与评测"],
+  ]);
+
+  for (const [pathname, title] of routes) {
+    const html = await readRoute(pathname);
+
+    assert.match(html, new RegExp(`<title>${title}｜Super Context<\\/title>`));
+    assert.equal((html.match(/class="judgment-card"/g) ?? []).length, 5);
+    assert.equal((html.match(/class="case-column /g) ?? []).length, 3);
+    assert.equal((html.match(/class="tradeoff-list"/g) ?? []).length, 1);
+    assert.match(html, /网页保存认知骨架/);
+    assert.match(html, /AI 随时展开细节/);
+  }
+
+  const foundations = await readRoute("/foundations");
+  assert.equal(
+    (foundations.match(/<a[^>]+class="area-card area-card-link"/g) ?? []).length,
+    6,
+  );
+});
+
+test("产品与用户样板保留已确认内容", async () => {
   const html = await readRoute("/foundations/product-and-users");
 
   assert.match(html, /<title>产品与用户｜Super Context<\/title>/);
   assert.match(html, /从模糊想法，到可验证的问题/);
+  assert.match(html, /内容样板 v1.0/);
+  assert.match(html, /已确认/);
   assert.equal((html.match(/class="judgment-card"/g) ?? []).length, 5);
   assert.equal((html.match(/class="case-column /g) ?? []).length, 3);
   assert.match(html, /现象.*用户.*场景.*问题.*价值.*最小方案.*验证/s);
@@ -77,15 +107,6 @@ test("产品与用户样板只保留认知骨架", async () => {
     /super-context 首先应该帮助哪一种人，在什么具体时刻，完成什么原本困难的任务？/,
   );
   assert.doesNotMatch(html, /入门任务|综合任务|10 个不诱导的访谈问题/);
-
-  await assert.rejects(
-    access(
-      new URL(
-        "../out/foundations/systems-and-abstractions/index.html",
-        import.meta.url,
-      ),
-    ),
-  );
 });
 
 test("starter 预览已经彻底移除", async () => {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function CopyPrompt({ prompt }: { prompt: string }) {
+export function CopyPrompt({ label, prompt }: { label: string; prompt: string }) {
   const [status, setStatus] = useState("复制提示词");
 
   async function copyPrompt() {
@@ -18,7 +18,7 @@ export function CopyPrompt({ prompt }: { prompt: string }) {
   return (
     <div className="prompt-card">
       <div className="prompt-card-head">
-        <span>AI 协作 · 问题拆分</span>
+        <span>{label}</span>
         <button onClick={copyPrompt} type="button">
           {status}
         </button>
