@@ -20,6 +20,25 @@ const terms = [
   ["Audit Event", "审计事件", "保存当时谁对什么资源做了什么、结果和依据是什么。", "四张图 · 证据链", "审计日志不是为了普通排障的业务日志。"],
 ];
 
+const termTargets: Record<string, string> = {
+  User: "#map-business",
+  Identity: "#map-business",
+  Tenant: "#map-business",
+  Membership: "#map-business",
+  Role: "#map-business",
+  Permission: "#map-business",
+  Policy: "#map-business",
+  Resource: "#map-business",
+  IdP: "#map-technology",
+  SSO: "#map-technology",
+  MFA: "#map-runtime",
+  Session: "#map-runtime",
+  Token: "#map-runtime",
+  PEP: "#map-runtime",
+  PDP: "#map-runtime",
+  "Audit Event": "#map-consistency",
+};
+
 const dataModels = [
   ["User", "全局主体", "id, status, profile", "1:N Identity；1:N Membership"],
   ["Identity", "可用于登录的身份", "provider, subject, credential_ref", "provider + subject 唯一"],
@@ -269,14 +288,21 @@ export function IdentityAccessPage() {
           </section>
 
           <section className="identity-section identity-v2-section" id="terms">
-            <SectionHeading index="03" label="名词地图" title="只解释刚才图中出现的对象" note="先知道它在哪里、负责什么，再记住名字；点击卡片可保持展开。" />
+            <SectionHeading index="03" label="名词地图" title="只解释刚才图中出现的对象" note="桌面端将鼠标移入即可查看简短解释；触屏端直接展示，不需要先点击展开。" />
             <div className="identity-term-groups" aria-label="名词分组"><span>身份与组织</span><span>授权模型</span><span>登录与会话</span><span>决策与证据</span></div>
             <div className="identity-term-grid">
               {terms.map(([term, cn, explain, position, confusion]) => (
-                <details className="identity-term-card" key={term}>
-                  <summary><span>{term}</span><b>{cn}</b><i aria-hidden="true">＋</i></summary>
-                  <div><p>{explain}</p><small><b>架构位置</b>{position}</small><small><b>不要混淆</b>{confusion}</small></div>
-                </details>
+                <a
+                  className="identity-term-card"
+                  href={termTargets[term] ?? "#architecture"}
+                  key={term}
+                  aria-label={`${term}，${cn}。${explain} 架构位置：${position}。不要混淆：${confusion}`}
+                >
+                  <span className="identity-term-layer identity-term-front" aria-hidden="true">
+                    <b>{term}</b><small>· {cn}</small>
+                  </span>
+                  <span className="identity-term-layer identity-term-back" aria-hidden="true">{explain}</span>
+                </a>
               ))}
             </div>
           </section>

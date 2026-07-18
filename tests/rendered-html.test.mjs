@@ -141,6 +141,10 @@ test("身份与权限样板形成完整的系统设计文档", async () => {
     4,
   );
   assert.equal((html.match(/class="identity-term-card"/g) ?? []).length, 16);
+  assert.equal((html.match(/class="identity-term-layer identity-term-front"/g) ?? []).length, 16);
+  assert.equal((html.match(/class="identity-term-layer identity-term-back"/g) ?? []).length, 16);
+  assert.doesNotMatch(html, /<details class="identity-term-card"/);
+  assert.match(html, /桌面端将鼠标移入即可查看简短解释/);
   assert.equal((html.match(/class="identity-detail-block/g) ?? []).length, 6);
   assert.equal((html.match(/class="identity-failure-grid"/g) ?? []).length, 1);
   assert.match(html, /业务与领域架构/);
