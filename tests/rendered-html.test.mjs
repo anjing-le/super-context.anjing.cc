@@ -166,6 +166,26 @@ test("产品与用户样板保留已确认内容", async () => {
   assert.doesNotMatch(html, /入门任务|综合任务|10 个不诱导的访谈问题/);
 });
 
+test("商业战略页呈现完整闭环与经营约束", async () => {
+  const html = await readRoute("/strategy");
+
+  assert.match(html, /<title>AI 共同进化战略｜Super Context × AI Infra<\/title>/);
+  assert.match(html, /让人与组织/);
+  assert.match(html, /在 AI 时代/);
+  assert.match(html, /共同进化/);
+  assert.equal((html.match(/class="strategy-gap-card"/g) ?? []).length, 6);
+  assert.equal((html.match(/class="strategy-problem-row"/g) ?? []).length, 6);
+  assert.equal(
+    (html.match(/class="strategy-problem-row strategy-problem-header"/g) ?? [])
+      .length,
+    1,
+  );
+  assert.equal((html.match(/class="strategy-moat-card"/g) ?? []).length, 5);
+  assert.equal((html.match(/class="strategy-gate-list"/g) ?? []).length, 1);
+  assert.match(html, /交付 90 天后，客户仍在真实使用/);
+  assert.match(html, /条件不足时，先做付费诊断，不直接进入定制开发/);
+});
+
 test("starter 预览已经彻底移除", async () => {
   const [packageJson, page, modulePage, layout] = await Promise.all([
     readFile(new URL("../package.json", import.meta.url), "utf8"),
